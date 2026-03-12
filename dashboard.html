@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<style>
+body{font-family:Arial;background:#111;color:white;padding:40px}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{padding:10px;border-bottom:1px solid #444}
+th{background:#222}
+button{padding:10px 15px;margin-right:10px;border:none;cursor:pointer;background:#333;color:white}
+button:hover{background:#555}
+</style>
+</head>
+
+<body>
+
+<h1>Dashboard de Validação</h1>
+
+<button onclick="exportar()">Exportar CSV</button>
+
+
+<table>
+<thead>
+<tr>
+<th>Usuário</th>
+<th>Senha</th>
+<th>Hora</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody id="logs"></tbody>
+</table>
+
+<script>
+const logs = JSON.parse(localStorage.getItem("logs")) || []
+const tabela = document.getElementById("logs")
+
+logs.forEach(l => {
+tabela.innerHTML += `
+<tr>
+<td style="text-align:center;">${l.usuario}</td>
+<td style="text-align:center;">${l.senha}</td>
+<td style="text-align:center;">${l.hora}</td>
+<td style="text-align:center;">${l.data}</td>
+</tr>`
+})
+
+function limpar(){
+localStorage.removeItem("logs")
+location.reload()
+}
+
+function exportar(){
+let csv = "usuario,senha,hora,data\n"
+logs.forEach(l=>{
+csv += `${l.usuario},${l.senha},${l.hora},${l.data}\n`
+})
+const blob = new Blob([csv], { type: 'text/csv' })
+const url = window.URL.createObjectURL(blob)
+const a = document.createElement("a")
+a.href = url
+a.download = "logs.csv"
+a.click()
+}
+</script>
+
+</body>
+</html>
